@@ -25,7 +25,7 @@ function App() {
   const completeTodo = (text) => {
     const newTodos = [...todos];
     const index = newTodos.findIndex(item => item.text === text);
-    newTodos[index].completed = true;
+    newTodos[index].completed = newTodos[index].completed ? false : true;
     setTodos(newTodos);
   };
   const deleteTodo = (text) => {
