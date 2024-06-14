@@ -4,6 +4,8 @@ import { TodoItem } from './components/TodoItem';
 import { TodoSearch } from './components/TodoSearch';
 import { CreateTodo } from './components/CreateTodo';
 import { useLocalStorage } from './hooks/useLocalStorage';
+import { TodosLoading } from './components/TodosLoading';
+import { TodosError } from './components/TodosError';
 import React from 'react';
 // const defaultTODOS = [
 //   { text: "Todo 1", completed: true },
@@ -14,7 +16,7 @@ import React from 'react';
 // ];
 
 function App() {
-  const [todos, saveTodos] = useLocalStorage('TODOS_V1', []);
+  const { item: todos, saveItem: saveTodos, loading, error } = useLocalStorage('TODOS_V1', []);
   const [searchTodo, setSearchTodo] = React.useState('');
   const completedTodos = todos.filter(item => !!item.completed).length;
   const totalTodos = todos.length;
@@ -36,12 +38,15 @@ function App() {
 
   return (
     <>
+
       <TodoCounter completed={completedTodos} total={totalTodos} />
       <div className="m-2">
         <TodoSearch
           searchTodo={searchTodo}
           setSearchTodo={setSearchTodo}
         />
+        {loading && <TodosLoading />}
+        {error && <TodosError />}
         <TodoList>
           {searchedTodos.map(todo => (
             <TodoItem
