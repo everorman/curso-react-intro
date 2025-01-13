@@ -1,6 +1,7 @@
 import React from 'react';
-export const TodoSearch = ({ searchTodo, setSearchTodo }) => {
-
+import { TodoContext } from '../TodoContex';
+export const TodoSearch = () => {
+  const { searchTodo, setSearchTodo } = React.useContext(TodoContext)
   const searchEvent = (event) => {
     const { value } = event.target;
     setSearchTodo(value);
