@@ -8,6 +8,7 @@ import { TodoSearch } from '../TodoSearch';
 import { TodosError } from '../TodosError';
 import { TodosLoading } from '../TodosLoading';
 import { Modal } from '../Modal';
+import { TodoForm } from '../TodoForm';
 
 
 export function AppUI() {
@@ -17,7 +18,8 @@ export function AppUI() {
     searchedTodos,
     completeTodo,
     deleteTodo,
-    openModal
+    openModal,
+    setOpenModal
   } = React.useContext(TodoContext)
   return (
 
@@ -40,11 +42,12 @@ export function AppUI() {
             />
           ))}
         </TodoList>
-        <CreateTodo />
-        {openModal && (<Modal>
-          La funcionalidad de agregar TODO
-        </Modal>)}
+        
       </div>
+      <CreateTodo setOpenModal={setOpenModal}/>
+        {openModal && (<Modal>
+          <TodoForm/>
+        </Modal>)}
     </>
 
   )
